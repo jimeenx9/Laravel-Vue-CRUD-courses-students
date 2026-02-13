@@ -1,11 +1,122 @@
-@import 'tailwindcss';
+/* RESET */
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
 
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
-@source '../**/*.blade.php';
-@source '../**/*.js';
+body{
+    background:#0f172a;
+    color:#e5e7eb;
+    padding:40px;
+}
 
-@theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+/* CONTENEDOR APP */
+#app{
+    max-width:900px;
+    margin:auto;
+    background:#111827;
+    padding:30px;
+    border-radius:16px;
+    box-shadow:0 20px 40px rgba(0,0,0,.5);
+}
+
+/* TITULOS */
+h1{
+    font-size:28px;
+    margin-bottom:20px;
+}
+
+h3{
+    margin:25px 0 10px 0;
+    color:#9ca3af;
+    font-weight:500;
+}
+
+/* NAV */
+nav{
+    margin-bottom:25px;
+}
+
+nav a{
+    text-decoration:none;
+    color:#60a5fa;
+    margin-right:15px;
+    font-weight:600;
+}
+
+nav a.router-link-active{
+    color:#fff;
+    border-bottom:2px solid #60a5fa;
+    padding-bottom:3px;
+}
+
+/* FORM */
+form{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-bottom:25px;
+}
+
+input, select{
+    background:#020617;
+    border:1px solid #374151;
+    color:white;
+    padding:10px 12px;
+    border-radius:8px;
+    outline:none;
+    transition:.2s;
+}
+
+input:focus, select:focus{
+    border-color:#60a5fa;
+}
+
+/* BOTONES */
+button{
+    background:#2563eb;
+    border:none;
+    padding:10px 14px;
+    border-radius:8px;
+    color:white;
+    font-weight:600;
+    cursor:pointer;
+    transition:.2s;
+}
+
+button:hover{
+    background:#1d4ed8;
+}
+
+button[type="button"]{
+    background:#374151;
+}
+
+button[type="button"]:hover{
+    background:#4b5563;
+}
+
+/* LISTA */
+ul{
+    list-style:none;
+}
+
+li{
+    background:#020617;
+    padding:14px;
+    border-radius:10px;
+    margin-bottom:10px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+li b{
+    color:#93c5fd;
+}
+
+li button{
+    margin-left:6px;
 }
