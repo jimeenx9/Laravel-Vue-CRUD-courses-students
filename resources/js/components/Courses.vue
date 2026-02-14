@@ -1,9 +1,9 @@
 <template>
-<div>
+<div class="card">
 
-    <h1>🎓 Cursos</h1>
+    <h1 class="page-title">Estudiantes</h1>
 
-    <h3>{{ editing ? 'Editar curso' : 'Nuevo curso' }}</h3>
+    <h3 class="section-title">{{ editing ? 'Editar curso' : 'Nuevo curso' }}</h3>
     <form @submit.prevent="saveCourse">
         <input v-model="newCourse.name" placeholder="Nombre" required>
         <input v-model="newCourse.description" placeholder="Descripción">
@@ -13,10 +13,16 @@
 
     <ul v-if="courses.length">
         <li v-for="course in courses" :key="course.id">
-            <strong>{{ course.name }}</strong>
-            <span v-if="course.description"> - {{ course.description }}</span>
-            <button @click="editCourse(course)">Editar</button>
-            <button @click="deleteCourse(course.id)">Eliminar</button>
+            <div>
+                <strong>{{ course.name }}</strong>
+                <span v-if="course.description"> - {{ course.description }}</span>
+            </div>
+
+            <div class="actions">
+                <button @click="editCourse(course)">Editar</button>
+                <button type="button" @click="deleteCourse(course.id)">Eliminar</button>
+            </div>
+
         </li>
     </ul>
 

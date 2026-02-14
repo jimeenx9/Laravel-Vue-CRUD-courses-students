@@ -2,3 +2,5 @@ http://localhost:8000/api/courses
 
 
 http://localhost:8000/api/courses
+
+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

@@ -1,14 +1,18 @@
 <template>
-<div>
+<div class="layout">
 
-    <h1>🎓 Panel académico</h1>
+    <aside class="sidebar">
+        <div class="logo">🎓 Academic</div>
 
-    <nav style="margin-bottom:20px">
-        <router-link to="/courses">Cursos</router-link> |
-        <router-link to="/students">Estudiantes</router-link>
-    </nav>
+        <nav class="nav">
+            <router-link to="/courses">Cursos</router-link>
+            <router-link to="/students">Estudiantes</router-link>
+        </nav>
+    </aside>
 
-    <router-view />
+    <main class="main">
+        <router-view />
+    </main>
 
 </div>
 </template>

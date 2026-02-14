@@ -1,9 +1,9 @@
 <template>
-<div>
+<div class="card">
 
-    <h1>👨‍🎓 Estudiantes</h1>
+    <h1 class="page-title">Estudiantes</h1>
 
-    <h3>{{ editingStudent ? 'Editar estudiante' : 'Nuevo estudiante' }}</h3>
+    <h3 class="section-title">{{ editingStudent ? 'Editar estudiante' : 'Nuevo estudiante' }}</h3>
     <form @submit.prevent="saveStudent">
 
         <input v-model="studentForm.name" placeholder="Nombre" required>
@@ -27,17 +27,22 @@
 
     <ul v-if="students.length">
         <li v-for="s in students" :key="s.id">
-            <strong>{{ s.name }}</strong>
-            ({{ s.email }}) -
-            Curso: <b>{{ s.course?.name }}</b>
+            <div>
+                <strong>{{ s.name }}</strong>
+                ({{ s.email }}) - Curso: <b>{{ s.course?.name }}</b>
+            </div>
 
+        <div class="actions">
             <button @click="editStudent(s)">Editar</button>
-            <button @click="deleteStudent(s.id)">Eliminar</button>
+            <button type="button" @click="deleteStudent(s.id)">Eliminar</button>
+        </div>
+
         </li>
     </ul>
 
 </div>
 </template>
+
 
 <script>
 export default {
