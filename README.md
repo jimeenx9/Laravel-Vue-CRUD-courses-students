@@ -1,59 +1,446 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🎓 Laravel + Vue CRUD — Cursos & Estudiantes (SPA)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+**Mini app fullstack** con **Laravel (API REST)** + **Vue (SPA con router)** desplegada en **OpenStack**.
 
-## About Laravel
+- 👤 **Autor:** Alberto Jiménez Rodríguez (@jimeenx9)
+- 🧑‍🏫 **Profesor:** Alfredo Moreno Vozmediano
+- 🧱 **Stack:** Laravel 12 + Vue 3 + Vite + SQLite + Apache2 + OpenStack
+- 🌐 **Acceso (OpenStack):** `http://172.16.12.227/courses` y `http://172.16.12.227/students`
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## ✅ Qué hace esta aplicación (resumen rápido)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+📚 **Cursos (CRUD completo)**
 
-## Learning Laravel
+- Crear curso (nombre + descripción)
+- Listar cursos
+- Editar curso
+- Eliminar curso
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+👨‍🎓 **Estudiantes (CRUD completo)**
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- Crear estudiante (nombre + email + curso)
+- Listar estudiantes
+- Editar estudiante
+- Eliminar estudiante
 
-## Laravel Sponsors
+🔗 **Relación 1:N real (Course → Students)**
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+- En el frontend se elige curso con un `<select>`
+- En el listado se muestra el curso asociado usando la relación Eloquent
 
-### Premium Partners
+---
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+## 🖼️ Capturas principales
 
-## Contributing
+> 📌 **Guarda estas capturas en**:
+> 
+> 
+> `/home/jimee/Proyectos/laravel-vue-cursos/img`
+> 
+> (la ruta en README será `/img/...`)
+> 
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 🖥️ Aplicación funcionando (Cursos)
 
-## Code of Conduct
+![Aplicación Cursos](/img/app-cursos.png)
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-## Security Vulnerabilities
+### 👨‍🎓 Aplicación funcionando (Estudiantes)
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+![Aplicación Estudiantes](/img/app-estudiantes.png)
 
-## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### ☁️ OpenStack - Instancia creada
+
+![OpenStack Instancia](/img/openstack-instancia.png)
+
+### 🌐 OpenStack - IP flotante / elástica asociada
+
+![OpenStack Floating IP](/img/openstack-floating-ip.png)
+
+
+### 🔥 Reglas de seguridad / puertos abiertos
+
+![OpenStack Security Group](/img/openstack-security-group.png)
+
+### 🧪 Terminal servidor - app desplegada en /var/www
+
+![Servidor Laravel en producción](/img/servidor-laravel-produccion.png)
+
+---
+
+## 🧠 Arquitectura del proyecto (cómo funciona por dentro)
+
+📌 Esto es una **SPA real**:
+
+- Laravel devuelve siempre la vista base (`welcome.blade.php`)
+- Vue Router decide qué pantalla mostrar (Cursos / Estudiantes)
+- Vue consume la API REST de Laravel mediante `fetch('/api/...')`
+
+🧩 **Esquema mental:**
+
+🖥️ Vue SPA
+
+⬇️ (fetch JSON)
+
+🧠 Laravel API REST
+
+⬇️ (Eloquent ORM)
+
+🗄️ SQLite
+
+---
+
+## 🗂️ Estructura del proyecto
+
+La estructura principal (desarrollo) incluye:
+
+- `resources/js/components/` → Vue Components (`App.vue`, `Courses.vue`, `Students.vue`)
+- `routes/api.php` → Endpoints REST con `apiResource`
+- `app/Http/Controllers/Api/` → Controladores de la API
+- `app/Models/` → Modelos Eloquent + relaciones
+- `database/migrations/` → Migraciones DB
+- `public/` → Entrada Laravel + Vite build en `public/build`
+
+---
+
+## 🧱 Backend (Laravel) — API REST + ORM
+
+### ✅ Endpoints REST
+
+Definidos en `routes/api.php`:
+
+- `/api/courses` (GET, POST, PUT, DELETE)
+- `/api/students` (GET, POST, PUT, DELETE)
+
+📌 Se usó `Route::apiResource()` para generar CRUD rápido y correcto.
+
+---
+
+### 🔗 Relación 1:N (Course → Students)
+
+📌 En Eloquent:
+
+- Un **Course tiene muchos Students**
+- Un **Student pertenece a un Course**
+
+Esto permite:
+
+- En estudiantes usar `Student::with('course')` para devolver el curso embebido en JSON
+- En Vue imprimir `s.course?.name`
+
+---
+
+### 🗄️ Base de datos SQLite
+
+📌 Se eligió SQLite para simplicidad de despliegue:
+
+- Fichero: `database/database.sqlite`
+- Migraciones aplicadas con `php artisan migrate`
+- Funciona perfecto para práctica y despliegue rápido
+
+---
+
+## 🎨 Frontend (Vue) — Componentes + Router + CRUD
+
+### 🧩 Componentes Vue
+
+- `App.vue` → layout general (sidebar + contenido)
+- `Courses.vue` → CRUD cursos
+- `Students.vue` → CRUD estudiantes
+
+📌 Buena separación de responsabilidades y lógica.
+
+---
+
+### 🧭 Vue Router (SPA real)
+
+Rutas:
+
+- `/courses`
+- `/students`
+
+Laravel siempre sirve la vista principal gracias al **catch-all**:
+
+📌 `routes/web.php`:
+
+```php
+Route::view('/{any}','welcome')->where('any','.*');
+```
+
+---
+
+### 🧾 CRUD completo desde Vue (fetch)
+
+Cada componente:
+
+- hace `fetch()` para listar
+- hace `POST/PUT/DELETE` contra la API
+- actualiza la UI sin recargar la página
+
+📌 En Estudiantes, además, se carga lista de cursos para el `<select>`.
+
+---
+
+## ☁️ Despliegue en OpenStack
+
+**La aplicación está desplegada y accesible desde la red del departamento (o mediante VPN)**.
+
+### 🧠 Red / IPs (explicación clara)
+
+✅ OpenStack del instituto vive dentro de la red del departamento.
+
+✅ El acceso se realiza desde la red del departamento o mediante VPN
+
+- La instancia tiene IP privada interna: `10.0.*`
+- Se asocia una **IP flotante (elástica)** del rango del instituto (ejemplo): `172.16.*12.227*`
+
+📌 Esa `172.16...` **NO es pública de Internet**, es **privada del instituto** (solo accesible desde su red o por VPN).
+
+---
+
+### 🔥 Puertos / Security Group
+
+Para que cargue desde navegador, se abrieron reglas típicas:
+
+- `80/tcp` → Apache (web)
+- (opcional) `22/tcp` → SSH (administración)
+
+📌 Para pruebas usamos también `8000` con `php artisan serve`, pero el despliegue final es por **Apache en 80**.
+
+---
+
+### 🧰 Instalación en servidor (resumen realista de lo hecho)
+
+1. Entrar por SSH:
+
+```bash
+ssh ubuntu@172.16.12.227
+```
+
+1. Clonar repo:
+
+```bash
+git clone https://github.com/jimeenx9/Laravel-Vue-CRUD-courses-students.git
+cd Laravel-Vue-CRUD-courses-students
+```
+
+1. Instalar dependencias PHP:
+
+```bash
+composer install
+```
+
+1. Instalar dependencias JS:
+
+```bash
+npm install
+```
+
+1. Compilar frontend (importantísimo para producción):
+
+```bash
+npm run build
+```
+
+📌 Esto genera `public/build/manifest.json`
+
+➡️ Si no existe, Laravel lanza la excepción:
+
+`ViteManifestNotFoundException`
+
+1. Crear `.env` y clave:
+
+```bash
+php artisan key:generate
+```
+
+1. Configurar SQLite:
+
+```bash
+touch database/database.sqlite
+```
+
+1. Migrar DB:
+
+```bash
+php artisan migrate --force
+```
+
+---
+
+### 🧾 Permisos (Configuración de permisos en entorno de producción)
+
+En producción, **Apache (www-data)** necesita poder escribir en:
+
+- `storage/`
+- `bootstrap/cache/`
+- `database/database.sqlite`
+
+Por eso se ajustaron permisos/propietarios para que:
+
+✅ la web pueda escribir logs
+
+✅ la web pueda escribir caché
+
+✅ SQLite no quede “readonly”
+
+---
+
+### ⚙️ Apache apuntando a `/public`
+
+Para que Laravel funcione bien, el DocumentRoot debe ser:
+
+`/var/www/Laravel-Vue-CRUD-courses-students/public`
+
+Y se activó `rewrite`:
+
+```bash
+sudo a2enmod rewrite
+sudo systemctl restart apache2
+```
+
+---
+
+### 🚀 Optimización (modo “producción”)
+
+En servidor se ejecutaron caches de Laravel como **www-data**:
+
+```bash
+sudo -u www-data php artisan config:cache
+sudo -u www-data php artisan route:cache
+sudo -u www-data php artisan view:cache
+sudo -u www-data php artisan optimize
+```
+
+📌 ¿Por qué como www-data?
+
+Porque en producción el que escribe esos archivos es el usuario del servidor web.
+
+---
+
+## 🧪 Cómo ejecutar en local (desarrollo)
+
+📌 En tu PC:
+
+1. Instalar dependencias:
+
+```bash
+composer install
+npm install
+```
+
+1. Crear `.env`:
+
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+1. SQLite + migraciones:
+
+```bash
+touch database/database.sqlite
+php artisan migrate
+```
+
+1. En desarrollo (Vite + Laravel):
+- Terminal A:
+
+```bash
+npm run dev
+```
+
+- Terminal B:
+
+```bash
+php artisan serve
+```
+
+---
+
+## 🌐 Cómo ejecutar en OpenStack (servidor ya desplegado)
+
+✅ Si Apache está configurado, basta con:
+
+- Encender la instancia
+- Entrar desde navegador con:
+
+`http://172.16.12.227/courses`
+
+`http://172.16.12.227/students`
+
+📌 Si la instancia está apagada → no responde.
+
+📌 Si está encendida → la web funciona sin lanzar artisan serve (porque Apache sirve Laravel).
+
+---
+
+## 💡 Flujo de trabajo recomendado (pro)
+
+✅ **Desarrollo en tu PC** (rápido, cómodo, VSCode, Vite dev)
+
+✅ **Git push** a GitHub
+
+✅ En servidor: **git pull + npm build + caches**
+
+🔥 Deploy típico:
+
+```bash
+cd /var/www/Laravel-Vue-CRUD-courses-students
+git pull
+composer install --no-dev --optimize-autoloader
+npm install
+npm run build
+sudo -u www-data php artisan migrate --force
+sudo -u www-data php artisan optimize
+```
+
+---
+
+## ✅ Checklist de la práctica
+
+### 🟣 Vue (Frontend)
+
+✅ Componentes Vue definidos
+
+✅ Separación lógica (cursos / estudiantes)
+
+✅ CRUD cursos completo
+
+✅ CRUD estudiantes completo
+
+✅ Relación 1:N en interfaz (select + visualización)
+
+✅ Vue Router (SPA real)
+
+### 🟥 Laravel (Backend)
+
+✅ API REST completa
+
+✅ Migraciones correctas
+
+✅ Modelos y relación Eloquent 1:N correcta
+
+### ☁️ OpenStack (Extra)
+
+✅ Desplegada y accesible desde red del departamento/VPN
+
+---
+
+## 📌 Notas finales
+
+- Se mantiene persistencia de datos con SQLite en servidor
+- Interfaz mejorada con diseño moderno (sidebar + cards + morado neon)
+
+### 🏁 Versión final
+
+**Versión:** v1.0.0  
+**Autor:** @jimeenx9  
+**Fecha:** Febrero 2026 
+
+---
+
+© 2026 — Práctica elaborada por **Alberto Jiménez**
