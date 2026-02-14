@@ -34,14 +34,6 @@
 
 ## 🖼️ Capturas principales
 
-> 📌 **Guarda estas capturas en**:
-> 
-> 
-> `/home/jimee/Proyectos/laravel-vue-cursos/img`
-> 
-> (la ruta en README será `/img/...`)
-> 
-
 ### 🖥️ Aplicación funcionando (Cursos)
 
 ![Aplicación Cursos](/img/app-cursos.png)
@@ -220,26 +212,26 @@ Para que cargue desde navegador, se abrieron reglas típicas:
 ssh ubuntu@172.16.12.227
 ```
 
-1. Clonar repo:
+2. Clonar repo:
 
 ```bash
 git clone https://github.com/jimeenx9/Laravel-Vue-CRUD-courses-students.git
 cd Laravel-Vue-CRUD-courses-students
 ```
 
-1. Instalar dependencias PHP:
+3. Instalar dependencias PHP:
 
 ```bash
 composer install
 ```
 
-1. Instalar dependencias JS:
+4. Instalar dependencias JS:
 
 ```bash
 npm install
 ```
 
-1. Compilar frontend (importantísimo para producción):
+5. Compilar frontend (importantísimo para producción):
 
 ```bash
 npm run build
@@ -251,19 +243,19 @@ npm run build
 
 `ViteManifestNotFoundException`
 
-1. Crear `.env` y clave:
+6. Crear `.env` y clave:
 
 ```bash
 php artisan key:generate
 ```
 
-1. Configurar SQLite:
+7. Configurar SQLite:
 
 ```bash
 touch database/database.sqlite
 ```
 
-1. Migrar DB:
+8. Migrar DB:
 
 ```bash
 php artisan migrate --force
@@ -332,21 +324,21 @@ composer install
 npm install
 ```
 
-1. Crear `.env`:
+2. Crear `.env`:
 
 ```bash
 cp .env.example .env
 php artisan key:generate
 ```
 
-1. SQLite + migraciones:
+3. SQLite + migraciones:
 
 ```bash
 touch database/database.sqlite
 php artisan migrate
 ```
 
-1. En desarrollo (Vite + Laravel):
+4. En desarrollo (Vite + Laravel):
 - Terminal A:
 
 ```bash
